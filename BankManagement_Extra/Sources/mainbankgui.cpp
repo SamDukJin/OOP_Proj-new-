@@ -1,13 +1,11 @@
 #include "mainbankgui.h"
 #include "ui_mainbankgui.h"
+
 #include "databasemanager.h"
 #include "featureswindow.h"
-#include <QSqlQuery>
-#include "mainbankgui.h"
 #include "adminpanel.h"
-#include "ui_mainbankgui.h"
-#include "databasemanager.h"
-#include "featureswindow.h"
+#include "settingwindow.h"
+#include "loanwindow.h"
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QMessageBox>
@@ -27,6 +25,8 @@ MainBankGUI::MainBankGUI(const QString &username, const QString &accountNumber, 
 
     connect(ui->ViewFeaturesBtn, &QPushButton::clicked, this, &MainBankGUI::openFeaturesWindow);
     connect(ui->AdminPanelBtn, &QPushButton::clicked, this, &MainBankGUI::openAdminPanel);
+    connect(ui->AccSettingBtn, &QPushButton::clicked, this, &MainBankGUI::openSetting);
+    connect(ui->LoanBtn, &QPushButton::clicked, this, &MainBankGUI::openLoan);
 }
 
 MainBankGUI::~MainBankGUI() {
@@ -35,8 +35,9 @@ MainBankGUI::~MainBankGUI() {
 
 void MainBankGUI::fetchUserDetails(const QString &username) {
     QSqlQuery query(DatabaseManager::getInstance()->getDatabase());
-    // query.prepare("PRAGMA table_info(accounts);");
+     // This block of code is just for the developer at backend only.
 
+    // query.prepare("PRAGMA table_info(accounts);");
     // if (query.exec()) {
     //     while (query.next()) {
     //         QString columnName = query.value(1).toString(); // Column name is in index 1
@@ -45,7 +46,9 @@ void MainBankGUI::fetchUserDetails(const QString &username) {
     // } else {
     //     qDebug() << "PRAGMA failed:" << query.lastError().text();
     // }
-    query.prepare("SELECT account_name, account_number, account_balance, status FROM accounts WHERE account_name = ?");
+
+    // Only for checking the list of the data in the database.
+    query.prepare("SELECT account_name, account_number, account_balance, account_password, status, account_loan FROM accounts WHERE account_name = ?");
     query.addBindValue(username);
 
     qDebug() << "Executing query:" << query.lastQuery();
@@ -57,10 +60,14 @@ void MainBankGUI::fetchUserDetails(const QString &username) {
         QString name = query.value(0).toString();
         QString accNum = query.value(1).toString();
         accountBalance = query.value(2).toDouble();
-        QString status = query.value(3).toString();
+        password = query.value(3).toString();
+        // double accountLoan = query.value(4).toDouble();
+        QString status = query.value(5).toString();
         if (status == "deactivated") {
-            ui->UsernamLabel->setText("Your account has been deactivated.");
-            ui->AccNumLabel->setText("Connect Admin for more information.\nAdmin Number: xxx-xxxx-xxxx");
+            ui->UsernamLabel->setVisible(false);
+            ui->AccNumLabel->setVisible(false);
+            ui->BalanceLabel->setVisible(false);
+            ui->AnnounceLabel->setText("       Your Account has been Deactivated.\nPlease Contact Admin Via xxxx-xxxxx-xxxx.");
 
             for (QObject* child : this->children()) {
                 QWidget* widget = qobject_cast<QWidget*>(child);
@@ -92,5 +99,19 @@ void MainBankGUI::openAdminPanel(){
     adminpanel *adminwin = new adminpanel(this);
     adminwin->setModal(true);
     adminwin->exec();
+}
+
+void MainBankGUI::openSetting(){
+    this->hide();
+    SettingWindow *settingwin = new SettingWindow(userName, password, accountNumber, this);
+    settingwin->setModal(true);
+    settingwin->exec();
+}
+
+void MainBankGUI::openLoan() {
+    this->hide();
+    LoanWindow *loanWin = new LoanWindow(userName, accountNumber, accountBalance, this);
+    loanWin->setModal(true);
+    loanWin->exec();
 }
 

@@ -14,12 +14,12 @@ SOURCES += \
     depositwindow.cpp \
     featureswindow.cpp \
     loanwindow.cpp \
-    loginwin.cpp \
     main.cpp \
     mainbankgui.cpp \
     mainwindow.cpp \
     registerwin.cpp \
     settingwindow.cpp \
+    transferwindow.cpp \
     withdrawwindow.cpp
 
 HEADERS += \
@@ -28,11 +28,11 @@ HEADERS += \
     depositwindow.h \
     featureswindow.h \
     loanwindow.h \
-    loginwin.h \
     mainbankgui.h \
     mainwindow.h \
     registerwin.h \
     settingwindow.h \
+    transferwindow.h \
     withdrawwindow.h
 
 FORMS += \
@@ -40,11 +40,11 @@ FORMS += \
     depositwindow.ui \
     featureswindow.ui \
     loanwindow.ui \
-    loginwin.ui \
     mainbankgui.ui \
     mainwindow.ui \
     registerwin.ui \
     settingwindow.ui \
+    transferwindow.ui \
     withdrawwindow.ui
 
 # Default rules for deployment.

@@ -10,8 +10,10 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
+    ui->Pswrd_inp->setEchoMode(QLineEdit::Password);
     connect(ui->LoginBtn, &QPushButton::clicked, this, &MainWindow::handleLogin);
     connect(ui->RegisterBtn_2, &QPushButton::clicked, this, &MainWindow::handleregister);
+    connect(ui->checkBox, &QPushButton::clicked, this, &MainWindow::handlehidepassword);
 }
 
 MainWindow::~MainWindow() {
@@ -77,4 +79,11 @@ void MainWindow::handleregister(){
     registerWin->exec();
     delete registerWin;
     this->close();
+}
+void MainWindow::handlehidepassword() {
+    if (ui->checkBox->isChecked()) {
+        ui->Pswrd_inp->setEchoMode(QLineEdit::Normal);
+    } else {
+        ui->Pswrd_inp->setEchoMode(QLineEdit::Password);
+    }
 }

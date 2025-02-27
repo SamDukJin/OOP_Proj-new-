@@ -22,6 +22,7 @@ public:
 private slots:
     void handleLogin();
     void handleregister();
+    void handlehidepassword();
 
 private:
     Ui::MainWindow *ui;

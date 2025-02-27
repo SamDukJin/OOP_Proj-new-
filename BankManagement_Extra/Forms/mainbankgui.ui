@@ -174,9 +174,9 @@
   <widget class="QPushButton" name="AccSettingBtn">
    <property name="geometry">
     <rect>
-     <x>560</x>
+     <x>570</x>
      <y>80</y>
-     <width>111</width>
+     <width>101</width>
      <height>31</height>
     </rect>
    </property>
@@ -193,9 +193,9 @@
   <widget class="QPushButton" name="AdminPanelBtn">
    <property name="geometry">
     <rect>
-     <x>560</x>
+     <x>570</x>
      <y>120</y>
-     <width>111</width>
+     <width>101</width>
      <height>31</height>
     </rect>
    </property>
@@ -207,6 +207,30 @@
    </property>
    <property name="text">
     <string>Admin Panel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="AnnounceLabel">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>180</y>
+     <width>441</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{
+	color: red;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

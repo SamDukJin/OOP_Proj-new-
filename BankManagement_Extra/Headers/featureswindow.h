@@ -18,12 +18,14 @@ private slots:
     void goHomeBtn();
     void goDeposit();
     void goWithdraw();
+    void goTransfer();
 private:
     Ui::FeaturesWindow *ui;
 
     QString userName;
     QString accountNumber;
     double accountBalance;
+    void checkLoanStatus();
 };
 
 #endif // FEATURESWINDOW_H

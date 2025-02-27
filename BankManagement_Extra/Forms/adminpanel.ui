@@ -241,6 +241,25 @@
     <string>Change Number</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="ActivateBtn">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>290</y>
+     <width>111</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-color: white;
+	color: rgb(82, 128, 255);
+}</string>
+   </property>
+   <property name="text">
+    <string>Activate Account</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

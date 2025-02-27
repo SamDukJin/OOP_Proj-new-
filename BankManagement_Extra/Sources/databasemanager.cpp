@@ -45,7 +45,8 @@ void DatabaseManager::createTables() {
     if (checkQuery.exec()) {
         bool balanceExists = false;
         bool loanExists = false;
-        bool statusExists = false;  // New status column check
+        bool statusExists = false;
+        bool loanStatusExists = false;
 
         while (checkQuery.next()) {
             QString columnName = checkQuery.value(1).toString();
@@ -77,6 +78,14 @@ void DatabaseManager::createTables() {
                 qDebug() << "Failed to add status column:" << alterQuery.lastError().text();
             } else {
                 qDebug() << "status column added successfully!";
+            }
+        }
+        if (!loanStatusExists) {
+            QSqlQuery alterQuery(db);
+            if (!alterQuery.exec("ALTER TABLE accounts ADD COLUMN loan_status TEXT DEFAULT 'paid'")) {
+                qDebug() << "Failed to add loan_status column:" << alterQuery.lastError().text();
+            } else {
+                qDebug() << "loan_status column added successfully!";
             }
         }
     } else {

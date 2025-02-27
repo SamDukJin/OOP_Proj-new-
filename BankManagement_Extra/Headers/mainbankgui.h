@@ -21,12 +21,15 @@ private:
     QString userName;
     QString accountNumber;
     double accountBalance;
+    QString password;
 
     void fetchUserDetails(const QString &username);
 
 private slots:
     void openFeaturesWindow();
     void openAdminPanel();
+    void openSetting();
+    void openLoan();
 };
 
 #endif // MAINBANKGUI_H

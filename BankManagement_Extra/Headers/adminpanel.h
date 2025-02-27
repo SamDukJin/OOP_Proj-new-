@@ -21,6 +21,7 @@ private slots:
     void changeaccnum();
     void deleteAccount();
     void deactivateAccount();
+    void activateAccount();
 
 private:
     Ui::adminpanel *ui;

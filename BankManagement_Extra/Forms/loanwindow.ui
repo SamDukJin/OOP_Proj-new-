@@ -7,11 +7,16 @@
     <x>0</x>
     <y>0</y>
     <width>700</width>
-    <height>500</height>
+    <height>440</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog{
+	background-color: rgb(255, 178, 25)
+}</string>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
@@ -27,6 +32,11 @@
      <pointsize>18</pointsize>
      <bold>true</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{
+	color:black
+}</string>
    </property>
    <property name="text">
     <string>Loan Window</string>
@@ -53,7 +63,7 @@
 }</string>
    </property>
    <property name="text">
-    <string>Account Number: 1110-01023-4122</string>
+    <string>Account Number: </string>
    </property>
   </widget>
   <widget class="QLabel" name="UsernamLabel">
@@ -77,7 +87,7 @@
 }</string>
    </property>
    <property name="text">
-    <string>Username:  Thanaphat</string>
+    <string>Username:  </string>
    </property>
   </widget>
   <widget class="QLabel" name="BalanceLabel">
@@ -101,16 +111,46 @@
 }</string>
    </property>
    <property name="text">
-    <string>Balance:   10,212.00 THB</string>
+    <string>Balance:   </string>
    </property>
   </widget>
-  <widget class="QLabel" name="BalanceLabel_2">
+  <widget class="QComboBox" name="comboBox">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>340</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>500</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>1000</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>2000</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>5000</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>180</y>
-     <width>481</width>
-     <height>21</height>
+     <y>340</y>
+     <width>221</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="font">
@@ -120,25 +160,127 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QLabel {
-    color: black;
+    <string notr="true">QLabel{
+	color: black;
 }</string>
    </property>
    <property name="text">
-    <string>Loan Balance:   1,010.20 THB</string>
+    <string>Select Amount of Loan:</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QLabel" name="loantakenLabel">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>80</y>
+     <width>221</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{
+	color:black;
+}</string>
+   </property>
+   <property name="text">
+    <string>Total Loan Taken: 0 ฿</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="HomeBtn">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>390</y>
+     <width>80</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	color:black;
+	background-color:white;
+}</string>
+   </property>
+   <property name="text">
+    <string>Home</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="LoanBtn">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>340</y>
+     <width>80</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	color:black;
+	background-color:white;
+}</string>
+   </property>
+   <property name="text">
+    <string>Take Loan</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="AnnounceLabel">
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>390</y>
-     <width>131</width>
-     <height>41</height>
+     <y>260</y>
+     <width>501</width>
+     <height>51</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{
+	color:black;
+}</string>
+   </property>
    <property name="text">
-    <string>Withdraw to Balance</string>
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="PayLoanBtn">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>120</y>
+     <width>101</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	color:black;
+	background-color: white;
+}</string>
+   </property>
+   <property name="text">
+    <string>Pay Loan</string>
+   </property>
+  </widget>
+  <widget class="QDateTimeEdit" name="dateTimeEdit">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>190</y>
+     <width>194</width>
+     <height>25</height>
+    </rect>
    </property>
   </widget>
  </widget>

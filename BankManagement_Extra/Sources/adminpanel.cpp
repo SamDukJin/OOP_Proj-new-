@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QStandardItemModel>
 #include "mainbankgui.h"
+
 adminpanel::adminpanel(QWidget *parent)
     : QDialog(parent), ui(new Ui::adminpanel) {
     ui->setupUi(this);
@@ -15,6 +16,7 @@ adminpanel::adminpanel(QWidget *parent)
     connect(ui->DeactivateBtn, &QPushButton::clicked, this, &adminpanel::deactivateAccount);
     connect(ui->DelACCBtn, &QPushButton::clicked, this, &adminpanel::deleteAccount);
     connect(ui->ChangeNumBtn, &QPushButton::clicked, this, &adminpanel::changeaccnum);
+    connect(ui->ActivateBtn, &QPushButton::clicked, this,&adminpanel::activateAccount);
 }
 
 adminpanel::~adminpanel() {
@@ -48,9 +50,18 @@ void adminpanel::loadAccounts() {
         }
 
         QList<QStandardItem *> rowItems;
-        rowItems.append(new QStandardItem(name));
-        rowItems.append(new QStandardItem(accNum));
-        rowItems.append(new QStandardItem(QString::number(balance, 'f', 2)));
+        QStandardItem *nameItem = new QStandardItem(name);
+        QStandardItem *accNumItem = new QStandardItem(accNum);
+        QStandardItem *balanceItem = new QStandardItem(QString::number(balance, 'f', 2));
+
+        // **Make the cells read-only**
+        nameItem->setFlags(nameItem->flags() & ~Qt::ItemIsEditable);
+        accNumItem->setFlags(accNumItem->flags() & ~Qt::ItemIsEditable);
+        balanceItem->setFlags(balanceItem->flags() & ~Qt::ItemIsEditable);
+
+        rowItems.append(nameItem);
+        rowItems.append(accNumItem);
+        rowItems.append(balanceItem);
         model->appendRow(rowItems);
     }
 
@@ -60,17 +71,6 @@ void adminpanel::loadAccounts() {
     }
 
     ui->AccountTableView->setModel(model);
-}
-
-void adminpanel::homebtn() {
-    this->hide();
-
-    MainBankGUI *mainBankGUIWin = new MainBankGUI("admin", "", 0.0);
-    mainBankGUIWin->setModal(true);
-    mainBankGUIWin->exec();
-
-    delete mainBankGUIWin;
-    this->close();
 }
 
 
@@ -108,8 +108,6 @@ void adminpanel::deactivateAccount() {
     qDebug() << "Account" << accNum << "has been deactivated.";
     loadAccounts();  // Refresh account list
 }
-
-
 
 void adminpanel::deleteAccount() {
     QString accNum = ui->AN_inp->text().trimmed();
@@ -159,4 +157,48 @@ void adminpanel::changeaccnum() {
     }
     qDebug() << "Account number changed from" << oldAccNum << "to" << newAccNum;
     loadAccounts();
+}
+
+void adminpanel::activateAccount(){
+    QString accNum = ui->AN_inp->text().trimmed();
+    if (accNum.isEmpty()) {
+        qDebug() << "Account number input is empty.";
+        return;
+    }
+
+    QSqlQuery query(DatabaseManager::getInstance()->getDatabase());
+
+    query.prepare("SELECT status FROM accounts WHERE account_number = ?");
+    query.addBindValue(accNum);
+    if (!query.exec() || !query.next()) {
+        qDebug() << "Account not found!";
+        return;
+    }
+
+    QString currentStatus = query.value(0).toString();
+    if (currentStatus == "activated") {
+        qDebug() << "Account is already activated.";
+        return;
+    }
+
+    query.prepare("UPDATE accounts SET status = 'active' WHERE account_number = ?");
+    query.addBindValue(accNum);
+    if (!query.exec()) {
+        qDebug() << "Failed to activate account:" << query.lastError().text();
+        return;
+    }
+
+    qDebug() << "Account" << accNum << "has been activated.";
+    loadAccounts();
+}
+
+void adminpanel::homebtn() {
+    this->hide();
+
+    MainBankGUI *mainBankGUIWin = new MainBankGUI("admin", "", 0.0);
+    mainBankGUIWin->setModal(true);
+    mainBankGUIWin->exec();
+
+    delete mainBankGUIWin;
+    this->close();
 }

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>SettingWindow</class>
- <widget class="QDialog" name="SettingWindow">
+ <class>transferwindow</class>
+ <widget class="QDialog" name="transferwindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>710</width>
-    <height>370</height>
+    <width>700</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,10 +21,10 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>0</x>
+     <x>260</x>
      <y>0</y>
-     <width>281</width>
-     <height>61</height>
+     <width>181</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
@@ -39,54 +39,26 @@
 }</string>
    </property>
    <property name="text">
-    <string>   Account Setting Window</string>
+    <string>Transfer Window</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="LogoutBtn">
+  <widget class="QLineEdit" name="AccNumSelect">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>320</y>
-     <width>131</width>
+     <x>200</x>
+     <y>190</y>
+     <width>191</width>
      <height>31</height>
     </rect>
    </property>
-   <property name="styleSheet">
-    <string notr="true">QPushButton{
-	color: black;
-	background-color:white
-}</string>
-   </property>
-   <property name="text">
-    <string>Logout</string>
-   </property>
   </widget>
-  <widget class="QPushButton" name="ChangePWBtn">
+  <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>270</y>
-     <width>131</width>
+     <x>30</x>
+     <y>190</y>
+     <width>171</width>
      <height>31</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QPushButton{
-	color: black;
-	background-color:white
-}</string>
-   </property>
-   <property name="text">
-    <string>Change Password</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="PasswordLabel">
-   <property name="geometry">
-    <rect>
-     <x>82</x>
-     <y>200</y>
-     <width>301</width>
-     <height>51</height>
     </rect>
    </property>
    <property name="font">
@@ -97,58 +69,115 @@
    </property>
    <property name="styleSheet">
     <string notr="true">QLabel{
-	color:black;
+	color: black;
 }</string>
    </property>
    <property name="text">
-    <string>Password:</string>
+    <string>To Account Number:</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="DelAcc">
+  <widget class="QLabel" name="UsernamLabel">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>320</y>
-     <width>131</width>
+     <x>30</x>
+     <y>90</y>
+     <width>481</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel {
+    color: black;
+}</string>
+   </property>
+   <property name="text">
+    <string>Username:  </string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="BalanceLabel">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>120</y>
+     <width>481</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel {
+    color: black;
+}</string>
+   </property>
+   <property name="text">
+    <string>Balance:  </string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="AccNumLabel">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>60</y>
+     <width>481</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel {
+    color: black;
+}</string>
+   </property>
+   <property name="text">
+    <string>Account Number: </string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="StatusLabel">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>190</y>
+     <width>231</width>
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton{
+    <string notr="true">QLabel{
 	color: black;
-	background-color:white
 }</string>
    </property>
    <property name="text">
-    <string>Delete Account</string>
+    <string>Status:</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="ChangeUserNamBtn">
+  <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>150</y>
-     <width>131</width>
+     <x>30</x>
+     <y>300</y>
+     <width>171</width>
      <height>31</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QPushButton{
-	color: black;
-	background-color:white
-}</string>
-   </property>
-   <property name="text">
-    <string>Change Username</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="UsernameLabel">
-   <property name="geometry">
-    <rect>
-     <x>82</x>
-     <y>80</y>
-     <width>301</width>
-     <height>51</height>
     </rect>
    </property>
    <property name="font">
@@ -159,87 +188,59 @@
    </property>
    <property name="styleSheet">
     <string notr="true">QLabel{
-	color:black;
+	color: black;
 }</string>
    </property>
    <property name="text">
-    <string>Username: </string>
+    <string>Amount:</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="UsernameChange">
+  <widget class="QLineEdit" name="AmountSelect">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>80</y>
-     <width>311</width>
-     <height>51</height>
+     <x>200</x>
+     <y>300</y>
+     <width>191</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="TransferBtn">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>300</y>
+     <width>131</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">QLineEdit{
-	color:black;
-	background-color:white;
+    <string notr="true">QPushButton{
+	background-color: white;
+	color: black;
 }</string>
    </property>
    <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="PasswordChange">
-   <property name="geometry">
-    <rect>
-     <x>380</x>
-     <y>200</y>
-     <width>151</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QLineEdit{
-	color:black;
-	background-color:white;
-}</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="PasswordChangeCon">
-   <property name="geometry">
-    <rect>
-     <x>530</x>
-     <y>200</y>
-     <width>161</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QLineEdit{
-	color:black;
-	background-color:white;
-}</string>
-   </property>
-   <property name="text">
-    <string/>
+    <string>Transfer</string>
    </property>
   </widget>
   <widget class="QPushButton" name="HomeBtn">
    <property name="geometry">
     <rect>
-     <x>610</x>
-     <y>323</y>
+     <x>601</x>
+     <y>453</y>
      <width>80</width>
      <height>31</height>
     </rect>
    </property>
    <property name="styleSheet">
     <string notr="true">QPushButton{
+	background-color: white;
 	color: black;
-	background-color:white
 }</string>
    </property>
    <property name="text">
-    <string>Home</string>
+    <string>Back</string>
    </property>
   </widget>
  </widget>
