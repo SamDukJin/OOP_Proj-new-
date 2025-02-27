@@ -136,7 +136,9 @@ This project is a comprehensive bank management system developed using Qt, provi
 
 ## License
 
-![Static Badge](https://img.shields.io/badge/LICENSE-MIT-red?style=flat&logo=github) ![Static Badge](https://custom-icon-badges.demolab.com/badge/-OPENSORUCE-red?logo=heart&style=flat)
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/SamDukJin/OOP_Proj-new-/blob/main/LICENSE) file for details.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT) [![Static Badge](https://custom-icon-badges.demolab.com/badge/-OPENSORUCE-red?logo=heart&style=flat)]()
 
 ## Acknowledgments
 
