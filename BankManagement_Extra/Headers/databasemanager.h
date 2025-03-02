@@ -11,6 +11,7 @@ public:
     static DatabaseManager* getInstance();
     QSqlDatabase& getDatabase();
     void createTables();
+    void logTransaction(const QString& accountNumber, const QString& transactionType, double amount = 0.0, const QString& details = "");
 
 private:
     DatabaseManager();

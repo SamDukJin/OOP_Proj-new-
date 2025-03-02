@@ -54,7 +54,6 @@ void adminpanel::loadAccounts() {
         QStandardItem *accNumItem = new QStandardItem(accNum);
         QStandardItem *balanceItem = new QStandardItem(QString::number(balance, 'f', 2));
 
-        // **Make the cells read-only**
         nameItem->setFlags(nameItem->flags() & ~Qt::ItemIsEditable);
         accNumItem->setFlags(accNumItem->flags() & ~Qt::ItemIsEditable);
         balanceItem->setFlags(balanceItem->flags() & ~Qt::ItemIsEditable);
@@ -195,7 +194,7 @@ void adminpanel::activateAccount(){
 void adminpanel::homebtn() {
     this->hide();
 
-    MainBankGUI *mainBankGUIWin = new MainBankGUI("admin", "", 0.0);
+    MainBankGUI *mainBankGUIWin = new MainBankGUI("admin", "", 0.0,this);
     mainBankGUIWin->setModal(true);
     mainBankGUIWin->exec();
 

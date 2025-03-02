@@ -1,11 +1,13 @@
 #include "mainbankgui.h"
 #include "ui_mainbankgui.h"
 
+#include "showrecwindow.h"
 #include "databasemanager.h"
 #include "featureswindow.h"
 #include "adminpanel.h"
 #include "settingwindow.h"
 #include "loanwindow.h"
+#include "utils.h"
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QMessageBox>
@@ -13,6 +15,7 @@
 MainBankGUI::MainBankGUI(const QString &username, const QString &accountNumber, double accountBalance, QWidget *parent)
     : QDialog(parent), ui(new Ui::MainBankGUI), userName(username), accountNumber(accountNumber), accountBalance(accountBalance) {
     ui->setupUi(this);
+
     if (username == "admin") {
         ui->AdminPanelBtn->setVisible(true);
         ui->BalanceLabel->setVisible(false);
@@ -27,6 +30,7 @@ MainBankGUI::MainBankGUI(const QString &username, const QString &accountNumber, 
     connect(ui->AdminPanelBtn, &QPushButton::clicked, this, &MainBankGUI::openAdminPanel);
     connect(ui->AccSettingBtn, &QPushButton::clicked, this, &MainBankGUI::openSetting);
     connect(ui->LoanBtn, &QPushButton::clicked, this, &MainBankGUI::openLoan);
+    connect(ui->ViewRprtBtn, &QPushButton::clicked, this, &MainBankGUI::openReport);
 }
 
 MainBankGUI::~MainBankGUI() {
@@ -48,7 +52,7 @@ void MainBankGUI::fetchUserDetails(const QString &username) {
     // }
 
     // Only for checking the list of the data in the database.
-    query.prepare("SELECT account_name, account_number, account_balance, account_password, status, account_loan FROM accounts WHERE account_name = ?");
+    query.prepare("SELECT account_name, account_number, account_balance, account_password, status FROM accounts WHERE account_name = ?");
     query.addBindValue(username);
 
     qDebug() << "Executing query:" << query.lastQuery();
@@ -61,8 +65,9 @@ void MainBankGUI::fetchUserDetails(const QString &username) {
         QString accNum = query.value(1).toString();
         accountBalance = query.value(2).toDouble();
         password = query.value(3).toString();
-        // double accountLoan = query.value(4).toDouble();
-        QString status = query.value(5).toString();
+        QString status = query.value(4).toString();
+
+        qDebug()<<"Status: " + status;
         if (status == "deactivated") {
             ui->UsernamLabel->setVisible(false);
             ui->AccNumLabel->setVisible(false);
@@ -73,6 +78,7 @@ void MainBankGUI::fetchUserDetails(const QString &username) {
                 QWidget* widget = qobject_cast<QWidget*>(child);
                 if (widget) widget->setEnabled(false);
             }
+            ui->AccSettingBtn->setEnabled(true);
             return;
         }
         if (accNum.length() == 13) {
@@ -82,36 +88,52 @@ void MainBankGUI::fetchUserDetails(const QString &username) {
 
         ui->UsernamLabel->setText("Account Name: " + name);
         ui->AccNumLabel->setText("Account Number: " + accNum);
-        ui->BalanceLabel->setText("Balance: " + QString::number(accountBalance, 'f', 2) + " ฿");
+        ui->BalanceLabel->setText("Balance: " +formatBalance(accountBalance));
     } else {
         QMessageBox::critical(this, "Error", "Failed to fetch user information.");
     }
 }
-void MainBankGUI::openFeaturesWindow() {
+void MainBankGUI::openFeaturesWindow()
+{
     this->hide();
     FeaturesWindow *featuresWin = new FeaturesWindow(userName, accountNumber, accountBalance, this);
     featuresWin->setModal(true);
     featuresWin->exec();
+    this->show();
 }
 
-void MainBankGUI::openAdminPanel(){
+void MainBankGUI::openAdminPanel()
+{
     this->hide();
     adminpanel *adminwin = new adminpanel(this);
     adminwin->setModal(true);
     adminwin->exec();
+    this->show();
 }
 
-void MainBankGUI::openSetting(){
+void MainBankGUI::openSetting()
+{
     this->hide();
     SettingWindow *settingwin = new SettingWindow(userName, password, accountNumber, this);
     settingwin->setModal(true);
     settingwin->exec();
+    this->show();
 }
 
-void MainBankGUI::openLoan() {
+void MainBankGUI::openLoan()
+{
     this->hide();
     LoanWindow *loanWin = new LoanWindow(userName, accountNumber, accountBalance, this);
     loanWin->setModal(true);
     loanWin->exec();
+    this->show();
 }
 
+void MainBankGUI::openReport()
+{
+    this->hide();
+    ShowRecWindow *recordwin = new ShowRecWindow(userName, accountNumber, accountBalance, this);
+    recordwin->setModal(true);
+    recordwin->exec();
+    this->show();
+}

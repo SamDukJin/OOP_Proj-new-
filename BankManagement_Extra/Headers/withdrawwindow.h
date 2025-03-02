@@ -23,9 +23,8 @@ private:
     Ui::WithdrawWindow *ui;
     QString userName;
     QString accNumber;
-    double accBalance;
+    double accountBalance;
 
-    void updateBalanceDisplay();
 };
 
 #endif // WITHDRAWWINDOW_H

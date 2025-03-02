@@ -19,6 +19,7 @@ SOURCES += \
     mainwindow.cpp \
     registerwin.cpp \
     settingwindow.cpp \
+    showrecwindow.cpp \
     transferwindow.cpp \
     withdrawwindow.cpp
 
@@ -32,7 +33,9 @@ HEADERS += \
     mainwindow.h \
     registerwin.h \
     settingwindow.h \
+    showrecwindow.h \
     transferwindow.h \
+    utils.h \
     withdrawwindow.h
 
 FORMS += \
@@ -44,6 +47,7 @@ FORMS += \
     mainwindow.ui \
     registerwin.ui \
     settingwindow.ui \
+    showrecwindow.ui \
     transferwindow.ui \
     withdrawwindow.ui
 

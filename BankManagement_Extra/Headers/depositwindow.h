@@ -23,9 +23,7 @@ private:
     Ui::DepositWindow *ui;
     QString userName;
     QString accNumber;
-    double accBalance;
-
-    void updateBalanceDisplay();
+    double accountBalance;
 };
 
 #endif // DEPOSITWINDOW_H

@@ -1,24 +1,25 @@
 #include "featureswindow.h"
-#include "depositwindow.h"
-#include "qsqlquery.h"
 #include "ui_featureswindow.h"
+
+#include "utils.h"
+#include "qsqlquery.h"
+#include "mainbankgui.h"
+#include "depositwindow.h"
 #include "withdrawwindow.h"
 #include "transferwindow.h"
-#include "mainbankgui.h"
 #include "databasemanager.h"
 
 FeaturesWindow::FeaturesWindow(const QString &name, const QString &accountNum, double balance, QWidget *parent)
     : QDialog(parent), ui(new Ui::FeaturesWindow), userName(name), accountNumber(accountNum), accountBalance(balance) {
 
     if (accountBalance < 0) accountBalance = 0;
-
     ui->setupUi(this);
 
     checkLoanStatus();
 
     ui->UsernamLabel->setText("Username: "+ userName);
     ui->AccNumLabel->setText("Account Number: " + accountNumber);
-    ui->BalanceLabel->setText("Balance: " + QString::number(accountBalance, 'f', 2) + " ฿");
+    ui->BalanceLabel->setText("Balance: " + formatBalance(accountBalance));
 
     connect(ui->HomeBtn, &QPushButton::clicked, this, &FeaturesWindow::goHomeBtn);
     connect(ui->DepositBtn, &QPushButton::clicked, this, &FeaturesWindow::goDeposit);
@@ -52,7 +53,7 @@ void FeaturesWindow::checkLoanStatus() {
 void FeaturesWindow::goHomeBtn() {
     this->hide();
 
-    MainBankGUI *gotoMainBankWin = new MainBankGUI(userName, accountNumber, accountBalance);
+    MainBankGUI *gotoMainBankWin = new MainBankGUI(userName, accountNumber, accountBalance,this);
     gotoMainBankWin->setModal(true);
     gotoMainBankWin->exec();
     delete gotoMainBankWin;
@@ -61,7 +62,7 @@ void FeaturesWindow::goHomeBtn() {
 void FeaturesWindow::goDeposit() {
     this->hide();
 
-    DepositWindow *depositWin = new DepositWindow(userName, accountNumber, accountBalance);
+    DepositWindow *depositWin = new DepositWindow(userName, accountNumber, accountBalance,this);
     depositWin->setModal(true);
     depositWin->exec();
     delete depositWin;
@@ -70,14 +71,14 @@ void FeaturesWindow::goDeposit() {
 void FeaturesWindow::goWithdraw(){
     this->hide();
 
-    WithdrawWindow *withdrawwin = new WithdrawWindow(userName, accountNumber, accountBalance);
+    WithdrawWindow *withdrawwin = new WithdrawWindow(userName, accountNumber, accountBalance,this);
     withdrawwin->setModal(true);
     withdrawwin->exec();
     delete withdrawwin;
 }
 void FeaturesWindow::goTransfer(){
     this->hide();
-    transferwindow *transferwin = new transferwindow(userName, accountNumber, accountBalance);
+    transferwindow *transferwin = new transferwindow(userName, accountNumber, accountBalance,this);
     transferwin->setModal(true);
     transferwin->exec();
     delete transferwin;

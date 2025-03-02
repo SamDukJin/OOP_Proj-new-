@@ -28,7 +28,6 @@ QSqlDatabase& DatabaseManager::getDatabase() {
 void DatabaseManager::createTables() {
     QSqlQuery query(db);
 
-    // Ensure the accounts table exists
     if (!query.exec(R"(
         CREATE TABLE IF NOT EXISTS accounts (
             account_name TEXT NOT NULL,
@@ -52,7 +51,8 @@ void DatabaseManager::createTables() {
             QString columnName = checkQuery.value(1).toString();
             if (columnName == "account_balance") balanceExists = true;
             if (columnName == "account_loan") loanExists = true;
-            if (columnName == "status") statusExists = true;  // Check for status
+            if (columnName == "status") statusExists = true;
+            if (columnName == "loan_status") loanStatusExists = true;
         }
 
         // Add account_balance if missing
@@ -91,8 +91,35 @@ void DatabaseManager::createTables() {
     } else {
         qDebug() << "Failed to check table structure:" << checkQuery.lastError().text();
     }
+
+    // Create transactions table
+    if (!query.exec(R"(
+        CREATE TABLE IF NOT EXISTS transactions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            account_number TEXT NOT NULL,
+            transaction_type TEXT NOT NULL,
+            amount REAL DEFAULT NULL,
+            details TEXT DEFAULT NULL,
+            date_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (account_number) REFERENCES accounts(account_number)
+        )
+    )")) {
+        qDebug() << "Failed to create transactions table:" << query.lastError().text();
+    }
 }
 
+void DatabaseManager::logTransaction(const QString& accountNumber, const QString& transactionType, double amount, const QString& details) {
+    QSqlQuery query(db);
+    query.prepare(R"(
+        INSERT INTO transactions (account_number, transaction_type, amount, details)
+        VALUES (:account_number, :transaction_type, :amount, :details)
+    )");
+    query.bindValue(":account_number", accountNumber);
+    query.bindValue(":transaction_type", transactionType);
+    query.bindValue(":amount", amount);
+    query.bindValue(":details", details);
 
-
-
+    if (!query.exec()) {
+        qDebug() << "Failed to log transaction:" << query.lastError().text();
+    }
+}

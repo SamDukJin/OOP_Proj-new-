@@ -61,7 +61,7 @@ void MainWindow::handleLogin() {
         QMessageBox::information(this, "Login Successful", message);
 
         this->hide();
-        MainBankGUI *bankGUI = new MainBankGUI(username, formattedAccountNumber, accountBalance);
+        MainBankGUI *bankGUI = new MainBankGUI(username, formattedAccountNumber, accountBalance,this);
         bankGUI->setModal(true);
         bankGUI->exec();
         delete bankGUI;

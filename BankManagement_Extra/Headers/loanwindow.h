@@ -2,8 +2,6 @@
 #define LOANWINDOW_H
 
 #include <QDialog>
-#include "databasemanager.h"
-
 namespace Ui {
 class LoanWindow;
 }
@@ -20,7 +18,6 @@ private slots:
     void fetchLoanDetails();
     void homebtn();
     void updateUI();
-    void checkDueDate();
     void updateDatabase(double loanAmount);
     void payloan();
 

@@ -15,6 +15,7 @@ public:
     explicit transferwindow(const QString &username, const QString &accountNumber, double balance, QWidget *parent=nullptr);
     ~transferwindow();
 
+
 private slots:
     void homebtn();
     void checkAccountAvailability();
@@ -25,7 +26,7 @@ private:
 
     QString userName;
     QString accountNum;
-    double balance;
+    double accountBalance;
 };
 
 #endif // TRANSFERWINDOW_H

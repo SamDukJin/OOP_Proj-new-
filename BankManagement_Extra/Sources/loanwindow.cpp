@@ -2,6 +2,7 @@
 #include "ui_loanwindow.h"
 #include "mainbankgui.h"
 #include "databasemanager.h"
+#include "utils.h"
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QMessageBox>
@@ -12,13 +13,13 @@ LoanWindow::LoanWindow(const QString &name, const QString &accountNum, double ba
 
     ui->UsernamLabel->setText("Username: " + userName);
     ui->AccNumLabel->setText("Account Number: " + accountNumber);
-    ui->BalanceLabel->setText("Balance: " + QString::number(accountBalance, 'f', 2) + " ฿");
+    ui->BalanceLabel->setText("Balance: " + formatBalance(accountBalance));
 
     connect(ui->HomeBtn, &QPushButton::clicked, this, &LoanWindow::homebtn);
     connect(ui->LoanBtn, &QPushButton::clicked, this, &LoanWindow::takeLoan);
     connect(ui->PayLoanBtn, &QPushButton::clicked, this, &LoanWindow::payloan);
 
-    fetchLoanDetails(); // Retrieve loan information on load
+    fetchLoanDetails();
 }
 
 LoanWindow::~LoanWindow() {
@@ -27,7 +28,7 @@ LoanWindow::~LoanWindow() {
 
 void LoanWindow::fetchLoanDetails() {
     QString cleanedAccountNumber = accountNumber;
-    cleanedAccountNumber.remove('-'); // Remove dashes if necessary
+    cleanedAccountNumber.remove('-');
 
     qDebug() << "Fetching loan details for account: " << cleanedAccountNumber;
 
@@ -50,12 +51,27 @@ void LoanWindow::fetchLoanDetails() {
 
 void LoanWindow::takeLoan() {
     double loanAmount = ui->comboBox->currentText().toDouble();
+
     if (loanAmount <= 0) {
         QMessageBox::warning(this, "Invalid Amount", "Please select a valid loan amount.");
         return;
     }
 
-    totalLoan += loanAmount;  // Add loan to total
+    if (totalLoan >= 10000) {
+        QMessageBox::warning(this, "Loan Limit Reached", "You cannot take more loans until you repay your existing debt.");
+        ui->AnnounceLabel->clear();
+        ui->AnnounceLabel->setText("Loan Limit reached: 10,000 ฿.\nMust pay the loan to perform next loan.");
+        return;
+    }
+
+    if (totalLoan + loanAmount > 10000) {
+        QMessageBox::warning(this, "Loan Exceeds Limit", "You can only take a loan up to 10,000 ฿. Reduce the amount.");
+        ui->AnnounceLabel->clear();
+        ui->AnnounceLabel->setText("Loan Limit reached: 10,000 ฿.\nMust pay the loan to perform next loan.");
+        return;
+    }
+
+    totalLoan += loanAmount;
     updateDatabase(loanAmount);
 }
 
@@ -68,12 +84,11 @@ void LoanWindow::updateDatabase(double loanAmount) {
     }
 
     QString cleanedAccountNumber = accountNumber;
-    cleanedAccountNumber.remove('-'); // Ensure no dashes
+    cleanedAccountNumber.remove('-');
 
     QSqlQuery query(db);
     query.prepare("UPDATE accounts SET account_balance = ?, account_loan = ? WHERE account_number = ?");
 
-    // DO NOT add loanAmount separately, just update totalLoan and balance
     double newBalance = accountBalance + loanAmount;
     query.addBindValue(newBalance);
     query.addBindValue(totalLoan);
@@ -90,17 +105,20 @@ void LoanWindow::updateDatabase(double loanAmount) {
 }
 
 void LoanWindow::updateUI() {
-    ui->BalanceLabel->setText("Balance: " + QString::number(accountBalance, 'f', 2) + " ฿");
-    ui->loantakenLabel->setText("Total Loan Taken: " + QString::number(totalLoan, 'f', 2) + " ฿");
+    ui->BalanceLabel->setText("Balance: " + formatBalance(accountBalance));
+    ui->loantakenLabel->setText("Total Loan Taken: " + formatBalance(accountBalance));
 
-    if (totalLoan > 0) {
-        ui->AnnounceLabel->setText("You have a pending loan of: " + QString::number(totalLoan, 'f', 2) +
-                                   " ฿\nPay before the end of the month to avoid restrictions.");
+    if (totalLoan >= 10000) {
+        ui->AnnounceLabel->setText("Loan Limit reached: 10,000 ฿.\nMust pay the loan to perform next loan.");
+    } else if (totalLoan > 0) {
+        ui->AnnounceLabel->setText("You have a pending loan of: " +formatBalance(accountBalance) +
+                                   " ฿\nMust not exceed 10,000 ฿.");
     } else {
         ui->AnnounceLabel->clear();
     }
-}
 
+    ui->LoanBtn->setEnabled(totalLoan < 10000);
+}
 void LoanWindow::payloan() {
     if (totalLoan <= 0) {
         QMessageBox::information(this, "No Loan", "You have no loan to pay.");
@@ -142,32 +160,11 @@ void LoanWindow::payloan() {
     }
 }
 
-void LoanWindow::checkDueDate() {
-    QDate currentDate = QDate::currentDate();
-    int lastDayOfMonth = QDate(currentDate.year(), currentDate.month(), 1).daysInMonth();
-    QDate dueDate(currentDate.year(), currentDate.month(), lastDayOfMonth);
 
-    if (currentDate > dueDate) { // If overdue
-        QSqlQuery query(DatabaseManager::getInstance()->getDatabase());
-        query.prepare("SELECT account_loan FROM accounts WHERE account_number = ?");
-        query.addBindValue(accountNumber);
-
-        if (query.exec() && query.next()) {
-            double loanAmount = query.value(0).toDouble();
-
-            if (loanAmount > 0) { // Loan exists and overdue
-                query.prepare("UPDATE accounts SET loan_status = 'unpaid' WHERE account_number = ?");
-                query.addBindValue(accountNumber);
-                query.exec();
-                ui->AnnounceLabel->setText("🚨 Loan overdue! Pay it to restore full access.");
-            }
-        }
-    }
-}
 
 void LoanWindow::homebtn() {
     this->hide();
-    MainBankGUI *mainbankguiwin = new MainBankGUI(userName, accountNumber, accountBalance);
+    MainBankGUI *mainbankguiwin = new MainBankGUI(userName, accountNumber, accountBalance,this);
     mainbankguiwin->setModal(true);
     mainbankguiwin->exec();
 }

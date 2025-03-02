@@ -212,7 +212,7 @@
   <widget class="QLabel" name="AnnounceLabel">
    <property name="geometry">
     <rect>
-     <x>130</x>
+     <x>170</x>
      <y>180</y>
      <width>441</width>
      <height>91</height>

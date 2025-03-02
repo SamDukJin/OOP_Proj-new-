@@ -7,7 +7,7 @@
 #include <QSqlQuery>
 #include <QSqlError>
 
-SettingWindow::SettingWindow(const QString &name, const QString &password,const QString &accountnumber, QWidget *parent)
+SettingWindow::SettingWindow(const QString &name, const QString &password, const QString &accountnumber, QWidget *parent)
     : QDialog(parent), ui(new Ui::SettingWindow), userName(name), Password(password), accountNumber(accountnumber) {
     ui->setupUi(this);
     ui->UsernameLabel->setText("Username: " + userName);
@@ -18,14 +18,12 @@ SettingWindow::SettingWindow(const QString &name, const QString &password,const 
     ui->PasswordChangeCon->setPlaceholderText("Confirm: ");
 
     connect(ui->PasswordChangeCon, &QLineEdit::textEdited, this, &SettingWindow::clearConfirmPlaceholder);
-
     connect(ui->ChangeUserNamBtn, &QPushButton::clicked, this, &SettingWindow::changeUsrNam);
     connect(ui->ChangePWBtn, &QPushButton::clicked, this, &SettingWindow::changePswd);
     connect(ui->LogoutBtn, &QPushButton::clicked, this, &SettingWindow::logout);
     connect(ui->DelAcc, &QPushButton::clicked, this, &SettingWindow::delAcc);
     connect(ui->HomeBtn, &QPushButton::clicked, this, &SettingWindow::gohome);
 }
-
 
 SettingWindow::~SettingWindow() {
     delete ui;
@@ -74,10 +72,23 @@ void SettingWindow::changePswd() {
 }
 
 void SettingWindow::logout() {
-    QMessageBox::information(this, "Logout", "You have been logged out.");
-    this->close();
-    MainWindow *mainWin = new MainWindow();
-    mainWin->show();
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Logout", "Are you sure you want to log out?",
+                                  QMessageBox::Yes | QMessageBox::No);
+
+    if (reply == QMessageBox::Yes) {
+        // Close all open windows before showing the login window
+        QWidgetList allWidgets = QApplication::topLevelWidgets();
+        for (QWidget* widget : std::as_const(allWidgets)) {
+            if (widget != nullptr) {
+                widget->close();
+            }
+        }
+
+        // After log out, it will send user to log in window.
+        MainWindow *loginWindow = new MainWindow();
+        loginWindow->show();
+    }
 }
 
 void SettingWindow::delAcc() {
@@ -91,7 +102,16 @@ void SettingWindow::delAcc() {
 
         if (query.exec()) {
             QMessageBox::information(this, "Success", "Successfully deleted your account!");
-            this->close();
+
+            // Close all open windows before returning to login screen
+            QWidgetList allWidgets = QApplication::topLevelWidgets();
+            for (QWidget* widget : std::as_const(allWidgets)) {
+                if (widget != nullptr) {
+                    widget->close();
+                }
+            }
+
+            // This will show the login window
             MainWindow *mainWin = new MainWindow();
             mainWin->show();
         } else {
@@ -106,10 +126,10 @@ void SettingWindow::clearConfirmPlaceholder() {
     }
 }
 
-
-void SettingWindow::gohome(){
+void SettingWindow::gohome() {
     this->hide();
-    MainBankGUI *mainwindow = new MainBankGUI(userName,accountNumber,0.0,this);
+
+    MainBankGUI *mainwindow = new MainBankGUI(userName, accountNumber, 0.0,this);
     mainwindow->setModal(true);
     mainwindow->exec();
 }

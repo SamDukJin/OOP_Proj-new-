@@ -30,6 +30,7 @@ private slots:
     void openAdminPanel();
     void openSetting();
     void openLoan();
+    void openReport();
 };
 
 #endif // MAINBANKGUI_H
