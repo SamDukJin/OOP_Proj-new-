@@ -21,6 +21,9 @@ MainBankGUI::MainBankGUI(const QString &username, const QString &accountNumber, 
         ui->BalanceLabel->setVisible(false);
         ui->UsernamLabel->setText("Welcome Admin!");
         ui->AccNumLabel->setVisible(false);
+        ui->ViewFeaturesBtn->setVisible(false);
+        ui->ViewRprtBtn->setVisible(false);
+        ui->LoanBtn->setVisible(false);
     } else {
         ui->AdminPanelBtn->setVisible(false);
         fetchUserDetails(username);

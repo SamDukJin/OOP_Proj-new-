@@ -12,8 +12,9 @@ RegisterWin::RegisterWin(QWidget *parent)
 
     connect(ui->usernameEdit, &QLineEdit::textChanged, this, &RegisterWin::validateInputs);
     connect(ui->passwordEdit, &QLineEdit::textChanged, this, &RegisterWin::validateInputs);
-    connect(ui->confirmPasswordEdit, &QLineEdit::textChanged, this, &RegisterWin::validateInputs);
     connect(ui->registerButton, &QPushButton::clicked, this, &RegisterWin::handleRegistration);
+    connect(ui->CancleBtn, &QPushButton::clicked, this, &RegisterWin::handlecanclebtn);
+    connect(ui->confirmPasswordEdit, &QLineEdit::textChanged, this, &RegisterWin::validateInputs);
 }
 
 RegisterWin::~RegisterWin() {
@@ -30,7 +31,7 @@ void RegisterWin::validateInputs() {
 QString RegisterWin::generateAccountNumber() {
     QSqlQuery query(DatabaseManager::getInstance()->getDatabase());
     QString number;
-
+    //Generate Number and check if the number are duplicated or not. If not, insert the account number into the database.
     do {
         number.clear();
         for (int i = 0; i < 13; ++i) {
@@ -111,3 +112,8 @@ void RegisterWin::handleRegistration() {
     }
 }
 
+void RegisterWin::handlecanclebtn(){
+    this->close();
+    MainWindow *loginwin = new MainWindow();
+    loginwin->show();
+}

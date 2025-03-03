@@ -17,6 +17,7 @@ public:
 private slots:
     void validateInputs();
     void handleRegistration();
+    void handlecanclebtn();
 
 private:
     Ui::RegisterWin *ui;
