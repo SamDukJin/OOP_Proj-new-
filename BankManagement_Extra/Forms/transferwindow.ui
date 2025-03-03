@@ -15,7 +15,15 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QDialog{
-	background-color: rgb(255, 178, 25)
+background-color: #f5f7fa
+}
+QMessageBox {
+    color: #2c3e50; 
+    background-color: #ecf0f1; 
+}
+
+QMessageBox QLabel {
+    color: #2c3e50; 
 }</string>
   </property>
   <widget class="QLabel" name="label">
@@ -34,8 +42,9 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QLabel{
-	color:black;
+    <string notr="true">QLabel {
+    color: #2c3e50;
+    font-weight: bold;
 }</string>
    </property>
    <property name="text">
@@ -50,6 +59,16 @@
      <width>191</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit {
+    background-color: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+	color: #2c3e50;	
+}</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -68,8 +87,9 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QLabel{
-	color: black;
+    <string notr="true">QLabel {
+    color: #2c3e50;
+    font-weight: bold;
 }</string>
    </property>
    <property name="text">
@@ -93,7 +113,8 @@
    </property>
    <property name="styleSheet">
     <string notr="true">QLabel {
-    color: black;
+    color: #2c3e50;
+    font-weight: bold;
 }</string>
    </property>
    <property name="text">
@@ -117,7 +138,8 @@
    </property>
    <property name="styleSheet">
     <string notr="true">QLabel {
-    color: black;
+    color: #2c3e50;
+    font-weight: bold;
 }</string>
    </property>
    <property name="text">
@@ -141,7 +163,8 @@
    </property>
    <property name="styleSheet">
     <string notr="true">QLabel {
-    color: black;
+    color: #2c3e50;
+    font-weight: bold;
 }</string>
    </property>
    <property name="text">
@@ -160,11 +183,13 @@
    <property name="font">
     <font>
      <pointsize>12</pointsize>
+     <bold>true</bold>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QLabel{
-	color: black;
+    <string notr="true">QLabel {
+    color: #2c3e50;
+    font-weight: bold;
 }</string>
    </property>
    <property name="text">
@@ -188,8 +213,9 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QLabel{
-	color: black;
+    <string notr="true">QLabel {
+    color: #2c3e50;
+    font-weight: bold;
 }</string>
    </property>
    <property name="text">
@@ -205,6 +231,16 @@
      <height>31</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit {
+    background-color: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+	color: #2c3e50;	
+}</string>
+   </property>
   </widget>
   <widget class="QPushButton" name="TransferBtn">
    <property name="geometry">
@@ -216,9 +252,19 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton{
-	background-color: white;
-	color: black;
+    <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+}
+
+QPushButton:pressed {
+    background-color: #1c5985;
 }</string>
    </property>
    <property name="text">
@@ -235,9 +281,19 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton{
-	background-color: white;
-	color: black;
+    <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+}
+
+QPushButton:pressed {
+    background-color: #1c5985;
 }</string>
    </property>
    <property name="text">

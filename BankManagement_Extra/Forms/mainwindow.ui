@@ -13,7 +13,25 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog{
+background-color: #f5f7f5
+}
+QMessageBox {
+    color: #2c3e50; /* Dark blue-gray color for text */
+    background-color: #ecf0f1; /* Light gray background for the message box */
+}
+
+QMessageBox QLabel {
+    color: #2c3e50; /* Ensure QLabel within QMessageBox also has the dark text color */
+}</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">QWidget{
+background-color: #f5f7fa
+}</string>
+   </property>
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
@@ -32,6 +50,12 @@
          <bold>true</bold>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+    color: #2c3e50;
+    font-weight: bold;
+}</string>
+       </property>
        <property name="text">
         <string>Username:</string>
        </property>
@@ -45,16 +69,44 @@
          <bold>true</bold>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+    color: #2c3e50;
+    font-weight: bold;
+}</string>
+       </property>
        <property name="text">
         <string>Password</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="Usnam_inp"/>
+      <widget class="QLineEdit" name="Usnam_inp">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+    background-color: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+	color: #2c3e50;	
+}</string>
+       </property>
+      </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLineEdit" name="Pswrd_inp"/>
+      <widget class="QLineEdit" name="Pswrd_inp">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+    background-color: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+	color: #2c3e50;	
+}</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
@@ -70,6 +122,22 @@
     <layout class="QGridLayout" name="gridLayout_4">
      <item row="0" column="0" alignment="Qt::AlignmentFlag::AlignVCenter">
       <widget class="QPushButton" name="LoginBtn">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+}
+
+QPushButton:pressed {
+    background-color: #1c5985;
+}</string>
+       </property>
        <property name="text">
         <string>Login</string>
        </property>
@@ -92,6 +160,12 @@
       <bold>true</bold>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel {
+    color: #2c3e50;  
+    font-weight: bold;
+}</string>
+    </property>
     <property name="text">
      <string>Login System...</string>
     </property>
@@ -108,6 +182,22 @@
     <layout class="QGridLayout" name="gridLayout_5">
      <item row="1" column="0">
       <widget class="QPushButton" name="RegisterBtn_2">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+}
+
+QPushButton:pressed {
+    background-color: #1c5985;
+}</string>
+       </property>
        <property name="text">
         <string>Register Now!</string>
        </property>
@@ -120,6 +210,12 @@
          <pointsize>12</pointsize>
          <bold>true</bold>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+    color: #2c3e50; 
+    font-weight: bold;
+}</string>
        </property>
        <property name="text">
         <string>               Did not have an account yet? </string>

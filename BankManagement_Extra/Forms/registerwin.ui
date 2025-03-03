@@ -15,7 +15,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QDialog{
-	background-color: rgb(255, 178, 25)
+background-color: #f5f7fa;
 }</string>
   </property>
   <widget class="QLabel" name="label">
@@ -34,8 +34,9 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QLabel{
-	color:black;
+    <string notr="true">QLabel {
+    color: #2c3e50;
+    font-weight: bold;
 }</string>
    </property>
    <property name="text">
@@ -53,10 +54,32 @@
    </property>
    <layout class="QGridLayout" name="gridLayout_4">
     <item row="2" column="2">
-     <widget class="QLineEdit" name="confirmPasswordEdit"/>
+     <widget class="QLineEdit" name="confirmPasswordEdit">
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+    background-color: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+	color: #2c3e50;	
+}</string>
+      </property>
+     </widget>
     </item>
     <item row="1" column="2">
-     <widget class="QLineEdit" name="passwordEdit"/>
+     <widget class="QLineEdit" name="passwordEdit">
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+    background-color: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+	color: #2c3e50;	
+}</string>
+      </property>
+     </widget>
     </item>
     <item row="1" column="0">
      <widget class="QLabel" name="label_14">
@@ -67,8 +90,9 @@
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">QLabel{
-	color:black;
+       <string notr="true">QLabel {
+    color: #2c3e50;
+    font-weight: bold;
 }</string>
       </property>
       <property name="text">
@@ -85,8 +109,9 @@
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">QLabel{
-	color:black;
+       <string notr="true">QLabel {
+    color: #2c3e50;
+    font-weight: bold;
 }</string>
       </property>
       <property name="text">
@@ -103,8 +128,9 @@
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">QLabel{
-	color:black;
+       <string notr="true">QLabel {
+    color: #2c3e50;
+    font-weight: bold;
 }</string>
       </property>
       <property name="text">
@@ -114,7 +140,18 @@ Confirm:</string>
      </widget>
     </item>
     <item row="0" column="2">
-     <widget class="QLineEdit" name="usernameEdit"/>
+     <widget class="QLineEdit" name="usernameEdit">
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+    background-color: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+	color: #2c3e50;	
+}</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -133,9 +170,19 @@ Confirm:</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton{
-	color: black;
-	background-color:white
+    <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+}
+
+QPushButton:pressed {
+    background-color: #1c5985;
 }</string>
    </property>
    <property name="text">
@@ -157,9 +204,19 @@ Confirm:</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton{
-	color: black;
-	background-color:white
+    <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+}
+
+QPushButton:pressed {
+    background-color: #1c5985;
 }</string>
    </property>
    <property name="text">

@@ -25,7 +25,6 @@ private:
     QString userName;
     QString accountNumber;
     double accountBalance;
-    void checkLoanStatus();
 };
 
 #endif // FEATURESWINDOW_H

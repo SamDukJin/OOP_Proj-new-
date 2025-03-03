@@ -106,7 +106,7 @@ void LoanWindow::updateDatabase(double loanAmount) {
 
 void LoanWindow::updateUI() {
     ui->BalanceLabel->setText("Balance: " + formatBalance(accountBalance));
-    ui->loantakenLabel->setText("Total Loan Taken: " + formatBalance(accountBalance));
+    ui->loantakenLabel->setText("Total Loan Taken: " + formatBalance(totalLoan));
 
     if (totalLoan >= 10000) {
         ui->AnnounceLabel->setText("Loan Limit reached: 10,000 ฿.\nMust pay the loan to perform next loan.");

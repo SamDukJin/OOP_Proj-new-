@@ -2,20 +2,16 @@
 #include "ui_featureswindow.h"
 
 #include "utils.h"
-#include "qsqlquery.h"
 #include "mainbankgui.h"
 #include "depositwindow.h"
 #include "withdrawwindow.h"
 #include "transferwindow.h"
-#include "databasemanager.h"
 
 FeaturesWindow::FeaturesWindow(const QString &name, const QString &accountNum, double balance, QWidget *parent)
     : QDialog(parent), ui(new Ui::FeaturesWindow), userName(name), accountNumber(accountNum), accountBalance(balance) {
 
     if (accountBalance < 0) accountBalance = 0;
     ui->setupUi(this);
-
-    checkLoanStatus();
 
     ui->UsernamLabel->setText("Username: "+ userName);
     ui->AccNumLabel->setText("Account Number: " + accountNumber);
@@ -29,25 +25,6 @@ FeaturesWindow::FeaturesWindow(const QString &name, const QString &accountNum, d
 
 FeaturesWindow::~FeaturesWindow() {
     delete ui;
-}
-void FeaturesWindow::checkLoanStatus() {
-    QSqlQuery query(DatabaseManager::getInstance()->getDatabase());
-    query.prepare("SELECT loan_status FROM accounts WHERE account_number = ?");
-    query.addBindValue(accountNumber);
-
-    if (query.exec() && query.next()) {
-        QString loanStatus = query.value(0).toString();
-
-        if (loanStatus == "unpaid") {
-            ui->WithdrawBtn->setEnabled(false);
-            ui->TransBtn->setEnabled(false);
-            ui->AnnounceLabel->setText("Loan overdue! Withdraw & Transfer disabled.");
-        } else {
-            ui->WithdrawBtn->setEnabled(true);
-            ui->TransBtn->setEnabled(true);
-            ui->AnnounceLabel->clear();
-        }
-    }
 }
 
 void FeaturesWindow::goHomeBtn() {

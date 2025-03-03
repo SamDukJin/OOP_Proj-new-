@@ -13,6 +13,11 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog{
+background-color: #f5f7fa;
+}</string>
+  </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
@@ -30,7 +35,8 @@
    </property>
    <property name="styleSheet">
     <string notr="true">QLabel {
-    color: black;
+    color: #2c3e50;
+    font-weight: bold;
 }</string>
    </property>
    <property name="text">
@@ -55,6 +61,22 @@
      <width>81</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+}
+
+QPushButton:pressed {
+    background-color: #1c5985;
+}</string>
    </property>
    <property name="text">
     <string>Home</string>

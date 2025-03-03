@@ -15,8 +15,9 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QDialog{
-	background-color: rgb(255, 178, 25)
-}</string>
+background-color: #f5f7fa
+}
+</string>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
@@ -34,8 +35,9 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QLabel{
-	color:black
+    <string notr="true">QLabel {
+    color: #2c3e50;
+    font-weight: bold;
 }</string>
    </property>
    <property name="text">
@@ -52,9 +54,19 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton{
-	color: black;
-	background-color:white
+    <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+}
+
+QPushButton:pressed {
+    background-color: #1c5985;
 }</string>
    </property>
    <property name="text">
@@ -71,9 +83,19 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton{
-	color: black;
-	background-color:white
+    <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+}
+
+QPushButton:pressed {
+    background-color: #1c5985;
 }</string>
    </property>
    <property name="text">
@@ -90,9 +112,19 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton{
-	color: black;
-	background-color:white
+    <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+}
+
+QPushButton:pressed {
+    background-color: #1c5985;
 }</string>
    </property>
    <property name="text">
@@ -116,7 +148,8 @@
    </property>
    <property name="styleSheet">
     <string notr="true">QLabel {
-    color: black;
+    color: #2c3e50;
+    font-weight: bold;
 }</string>
    </property>
    <property name="text">
@@ -140,7 +173,8 @@
    </property>
    <property name="styleSheet">
     <string notr="true">QLabel {
-    color: black;
+    color: #2c3e50;
+    font-weight: bold;
 }</string>
    </property>
    <property name="text">
@@ -164,7 +198,8 @@
    </property>
    <property name="styleSheet">
     <string notr="true">QLabel {
-    color: black;
+    color: #2c3e50;
+    font-weight: bold;
 }</string>
    </property>
    <property name="text">
@@ -181,37 +216,23 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton{
-	color: black;
-	background-color:white
+    <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+}
+
+QPushButton:pressed {
+    background-color: #1c5985;
 }</string>
    </property>
    <property name="text">
     <string>Home</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="AnnounceLabel">
-   <property name="geometry">
-    <rect>
-     <x>80</x>
-     <y>210</y>
-     <width>501</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QLabel{
-	color:black;
-}</string>
-   </property>
-   <property name="text">
-    <string/>
    </property>
   </widget>
  </widget>
