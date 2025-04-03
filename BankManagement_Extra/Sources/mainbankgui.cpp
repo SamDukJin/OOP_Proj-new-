@@ -42,7 +42,8 @@ MainBankGUI::~MainBankGUI() {
 
 void MainBankGUI::fetchUserDetails(const QString &username) {
     QSqlQuery query(DatabaseManager::getInstance()->getDatabase());
-     // This block of code is just for the developer at backend only.
+    /* This block of code is just for the developer at backend only.
+       These are for checking the details of the table that will be put in the table_info(<name of the table>)*/
 
     // query.prepare("PRAGMA table_info(accounts);");
     // if (query.exec()) {

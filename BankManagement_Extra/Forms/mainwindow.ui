@@ -11,19 +11,19 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Login Window</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QDialog{
 background-color: #f5f7f5
 }
 QMessageBox {
-    color: #2c3e50; /* Dark blue-gray color for text */
-    background-color: #ecf0f1; /* Light gray background for the message box */
+    color: #2c3e50; 
+    background-color: #ecf0f1;
 }
 
 QMessageBox QLabel {
-    color: #2c3e50; /* Ensure QLabel within QMessageBox also has the dark text color */
+    color: #2c3e50;
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -197,7 +197,6 @@ QCheckBox::indicator {
 
 QCheckBox::indicator:checked {
     background-color: #2c3e50;
-    image: url(:/images/checkmark.svg);
 }
 
 QCheckBox::indicator:unchecked {

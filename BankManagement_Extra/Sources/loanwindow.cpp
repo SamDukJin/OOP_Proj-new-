@@ -72,6 +72,7 @@ void LoanWindow::takeLoan() {
     }
 
     totalLoan += loanAmount;
+    DatabaseManager::getInstance()->logTransaction(accountNumber, "Loan", loanAmount, "Loan taken.");
     updateDatabase(loanAmount);
 }
 
@@ -111,7 +112,7 @@ void LoanWindow::updateUI() {
     if (totalLoan >= 10000) {
         ui->AnnounceLabel->setText("Loan Limit reached: 10,000 ฿.\nMust pay the loan to perform next loan.");
     } else if (totalLoan > 0) {
-        ui->AnnounceLabel->setText("You have a pending loan of: " +formatBalance(accountBalance) +
+        ui->AnnounceLabel->setText("You have a pending loan of: " +formatBalance(totalLoan) +
                                    " ฿\nMust not exceed 10,000 ฿.");
     } else {
         ui->AnnounceLabel->clear();

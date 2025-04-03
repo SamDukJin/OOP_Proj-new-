@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Deposit Window</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QDialog{
@@ -167,6 +167,7 @@ QMessageBox QLabel {
     border-radius: 5px;
     padding: 5px;
     font-size: 14px;
+	color: #2c3e50;	
 }</string>
    </property>
   </widget>

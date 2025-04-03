@@ -37,7 +37,7 @@ void ShowRecWindow::loadTransactionHistory()
         return;
     }
 
-    delete model; // Clear previous model to prevent memory leaks
+    delete model;
     model = new QSqlTableModel(this, dbManager->getDatabase());
 
     model->setTable("transactions");
